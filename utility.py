@@ -3,8 +3,6 @@ import re
 import subprocess
 import urllib3
 
-VIDEO_ID = "WeUf6hYGvqM"
-
 
 def get_video_as_mp3(video_id, path_prefix=""):
     """
@@ -17,7 +15,7 @@ def get_video_as_mp3(video_id, path_prefix=""):
         "mp3",
         "-o",
         "%(title)s.%(ext)s",
-        "https://youtu.be/{}".format(VIDEO_ID)
+        "https://youtu.be/{}".format(video_id)
     ]
 
     youtube_dl_cmd = subprocess.run(cmd_arr, stdout=subprocess.PIPE, text=True)
@@ -38,7 +36,7 @@ def get_video_thumbnail(video_id):
     """
 
     """
-    url = "https://img.youtube.com/vi/{}/hqdefault.jpg".format(VIDEO_ID)
+    url = "https://img.youtube.com/vi/{}/hqdefault.jpg".format(video_id)
 
     http = urllib3.PoolManager()
     response = http.request('GET', url)
@@ -63,6 +61,6 @@ def tag_mp3_file(filepath, video_id, title, artist, year):
     audiofile.tag.images.set(3, thumbnail, 'image/jpeg')
 
     _year = eyed3.core.Date(year)
-    audio.tag.recording_date = _year
+    audiofile.tag.recording_date = _year
 
     audiofile.tag.save()
