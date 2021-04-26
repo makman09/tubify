@@ -2,3 +2,4 @@ eyeD3
 youtube_dl
 pydub
 urllib3
+spleeter

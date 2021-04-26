@@ -6,8 +6,9 @@ import urllib3
 
 def get_video_as_mp3(video_id, path_prefix=""):
     """
-
+        Download audio of video file
     """
+    # TODO - integrate path_prefix
     cmd_arr = [
         "youtube-dl",
         "--extract-audio",
@@ -30,11 +31,9 @@ def get_video_as_mp3(video_id, path_prefix=""):
         raise Exception(youtube_dl_cmd.stderr)
 
 
-
-
 def get_video_thumbnail(video_id):
     """
-
+        Pull thumbnail img data by video_id
     """
     url = "https://img.youtube.com/vi/{}/hqdefault.jpg".format(video_id)
 
@@ -46,7 +45,11 @@ def get_video_thumbnail(video_id):
 
 def tag_mp3_file(filepath, video_id, title, artist, year):
     """
-
+        Tag a file by
+        - thumbnail through video id
+        - title
+        - artist
+        - year
     """
     audiofile = eyed3.load(filepath)
 
