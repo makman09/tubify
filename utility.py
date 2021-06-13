@@ -6,7 +6,8 @@ import urllib3
 
 def get_video_as_mp3(video_id, path_prefix=""):
     """
-        Download audio of video file
+        Download audio of video file & return
+        title of video
     """
     # TODO - integrate path_prefix
     cmd_arr = [
@@ -67,3 +68,14 @@ def tag_mp3_file(filepath, video_id, title, artist, year):
     audiofile.tag.recording_date = _year
 
     audiofile.tag.save()
+
+
+def timestamp_to_milliseconds(timestamp):
+    """
+        Return timestamp in milliseconds
+    """
+    regex_timestamp = r'(\d{2}):(\d{2}):(\d{2})'
+    (h, m, s) = re.match(regex_timestamp, timestamp).groups()
+    h, m, s = int(h), int(m), int(s)
+
+    return (h*3600 + m*60 + s)*1000
