@@ -14,15 +14,13 @@ pip install -r requirements.txt
 """
     Example of batch processings
 """
+from tubify import get_video_as_mp3, tag_mp3_file, splice_audio, strech_audio
 
 videos = [{
     "video_id": "iYmm3dDkaIs",
     "artist": "Laika",
     "year":  2016
 }]
-
-from tubify import get_video_as_mp3, tag_mp3_file, splice_audio
-
 for video in videos:
     video_id = video["video_id"]
     artist = video["artist"]
@@ -60,10 +58,15 @@ for video in videos:
         artist,
         year
     )
+    print("Splicing and streching audio")
     splice_audio(
         "{}.mp3".format(video_title),
         start=video["start"],
         end=video["end"]
+    )
+    strech_audio(
+        "{}.mp3".format(video_title),
+        "00:10:00"
     )
 ```
 
